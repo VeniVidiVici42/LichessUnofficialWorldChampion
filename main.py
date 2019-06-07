@@ -3,7 +3,7 @@ import time
 import utils
 import constants
 
-current_unofficial_world_champion = "DrDrunkenstein" # Magnus Carlsen's first real account (?)
+current_unofficial_world_champion = constants.magnus_account # Magnus Carlsen's first real account (?)
 last_title_change = utils.lichess_join_date(current_unofficial_world_champion)
 games_played_with_title = 0
 champion_history = []
@@ -24,7 +24,7 @@ while last_title_change < utils.datetime_to_utc_ms(datetime.utcnow()):
 			last_title_change = utils.datetime_to_utc_ms(utils.day_time_to_datetime(tag_dict['UTCDate'], tag_dict['UTCTime']))
 			games_played_with_title = 0
 			print(save_info)
-			with open("worldchamp2.txt", 'a') as f:
+			with open(constants.dump_filename, 'a') as f:
 				f.write(' '.join(save_info) + '\n')
 			break
 		elif tag_dict['Black'] == current_unofficial_world_champion and tag_dict['Result'] == '1-0':
@@ -33,7 +33,7 @@ while last_title_change < utils.datetime_to_utc_ms(datetime.utcnow()):
 			last_title_change = utils.datetime_to_utc_ms(utils.day_time_to_datetime(tag_dict['UTCDate'], tag_dict['UTCTime']))
 			games_played_with_title = 0
 			print(save_info)
-			with open("worldchamp2.txt", 'a') as f:
+			with open(constants.dump_filename, 'a') as f:
 				f.write(' '.join(save_info) + '\n')
 			break
 	if current_unofficial_world_champion == prev_unofficial_world_champion:

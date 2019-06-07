@@ -25,7 +25,7 @@ def get_lichess_pgns(start, end, player):
 	# different pgns are separated by double newlines
 	# unfortunately this also produces e.g. ' 0-1' as its own pgn, which for some reason is included despite requesting to not have the moves
 	# filter those out
-	return [pgn for pgn in response.text.split('\n\n') if len(pgn) > constants.min_length] # different pgns separated by double newline
+	return [pgn for pgn in response.text.split('\n\n') if len(pgn) > constants.min_pgn_length] # different pgns separated by double newline
 
 def parse_pgn(pgn):
 	tags = [tag for tag in pgn.split('\n') if len(tag) > 0] # clear whitespace
